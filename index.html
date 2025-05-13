@@ -43,31 +43,48 @@
     p {
       color: #b0b0b0;
     }
+    #timer {
+      color: #ff5252;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h1>My inventory</h1>
+  <h1>Skins que intercambio</h1>
 
-   <!-- Skin 1 -->
   <div class="skins-container">
     <div class="skin">
       <img src="https://cdn.cloudflare.steamstatic.com/apps/730/icons/econ/default_generated/weapon_ak47_am_ak47_hydroponic_light_large.07f92fc3b400e0c36f1a9d58a25301ab2d8c2e8c.png" alt="AK-47 | Hydroponic">
       <h2>AK-47 | Hydroponic</h2>
       <p>Calidad: Minimal Wear<br>
       Precio estimado: $80 USD<br>
-      Interesado en cambiar: ✅</p>
+      Interesado en cambiar: ✅<br>
+      <span id="timer">Tiempo restante: 10:00</span></p>
     </div>
-
-    
-    <!-- Skin 2 -->
-    <div class="skin">
-      <img src="https://cdn.cloudflare.steamstatic.com/apps/730/icons/econ/default_generated/weapon_ak47_am_ak47_asiimov_light_large.56eecf12cd6d221b4f1e7a5cf6bcd5a235b107cd.png" alt="AK-47 | Asiimov">
-      <h2>AK-47 | Asiimov</h2>
-      <p>Calidad: Field-Tested<br>
-      Precio estimado: $50 USD<br>
-      Interesado en cambiar: ✅</p>
-    </div>  
   </div>
+
+  <script>
+    function startTimer() {
+      var timerElement = document.getElementById('timer');
+      var timeRemaining = 10 * 60; // 10 minutos
+
+      var interval = setInterval(function() {
+        var minutes = Math.floor(timeRemaining / 60);
+        var seconds = timeRemaining % 60;
+        var formattedTime = minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
+        timerElement.textContent = 'Tiempo restante: ' + formattedTime;
+
+        timeRemaining--;
+
+        if (timeRemaining < 0) {
+          clearInterval(interval);
+          timerElement.textContent = 'Tradeable';
+        }
+      }, 1000);
+    }
+
+    window.onload = startTimer;
+  </script>
 
 </body>
 </html>
