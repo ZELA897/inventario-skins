@@ -66,26 +66,36 @@
   </div>
 
   <script>
+    // Función para iniciar el contador
     function startTimer() {
       var timerElement = document.getElementById('timer');
-      var timeRemaining = 10 * 60; // 10 minutos
+      var timeRemaining = localStorage.getItem('timeRemaining'); // Obtiene el tiempo restante desde el localStorage
 
+      if (!timeRemaining) {
+        timeRemaining = 10 * 60; // Si no hay tiempo guardado, usa 10 minutos
+      } else {
+        timeRemaining = parseInt(timeRemaining); // Convierte el tiempo a entero
+      }
+
+      // Función que actualiza el contador cada segundo
       var interval = setInterval(function() {
-        var minutes = Math.floor(timeRemaining / 60);
-        var seconds = timeRemaining % 60;
+        var minutes = Math.floor(timeRemaining / 60); // Calcula los minutos
+        var seconds = timeRemaining % 60; // Calcula los segundos restantes
         var formattedTime = minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
         timerElement.textContent = 'Tiempo restante: ' + formattedTime;
 
-        timeRemaining--;
+        timeRemaining--; // Decrementa el tiempo restante
+        localStorage.setItem('timeRemaining', timeRemaining); // Guarda el nuevo tiempo en el localStorage
 
         if (timeRemaining < 0) {
-          clearInterval(interval);
-          timerElement.textContent = 'Tradeable';
+          clearInterval(interval); // Detiene el intervalo
+          timerElement.textContent = 'Tradeable'; // Muestra "Tradeable"
+          localStorage.removeItem('timeRemaining'); // Elimina el tiempo cuando ya no es necesario
         }
-      }, 1000);
+      }, 1000); // Actualiza cada segundo
     }
 
-    window.onload = startTimer;
+    window.onload = startTimer; // Inicia cuando la página carga
   </script>
 
 </body>
