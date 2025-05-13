@@ -53,6 +53,7 @@
   <h1>Skins que intercambio</h1>
 
   <div class="skins-container">
+    <!-- Skin AK-47 | Hydroponic -->
     <div class="skin">
       <img src="https://cdn.cloudflare.steamstatic.com/apps/730/icons/econ/default_generated/weapon_ak47_am_ak47_hydroponic_light_large.07f92fc3b400e0c36f1a9d58a25301ab2d8c2e8c.png" alt="AK-47 | Hydroponic">
       <h2>AK-47 | Hydroponic</h2>
@@ -60,6 +61,16 @@
       Precio estimado: $80 USD<br>
       Interesado en cambiar: ✅<br>
       <span id="timer">Tiempo restante: 10:00</span></p>
+    </div>
+
+    <!-- Skin M4A4 | Desolate Space -->
+    <div class="skin">
+      <img src="https://cdn.cloudflare.steamstatic.com/apps/730/icons/econ/default_generated/weapon_m4a4_am_m4a4_desolate_space_light_large.c639033d4c9d301e95a3f6e2ccfbbf72975a3d60.png" alt="M4A4 | Desolate Space">
+      <h2>M4A4 | Desolate Space (Field-Tested)</h2>
+      <p>Calidad: Field-Tested<br>
+      Float: 0.2704<br>
+      Precio estimado: $40 USD<br>
+      Interesado en cambiar: ✅</p>
     </div>
 
     <!-- Puedes añadir más skins aquí -->
@@ -71,10 +82,12 @@
       var timerElement = document.getElementById('timer');
       var timeRemaining = localStorage.getItem('timeRemaining'); // Obtiene el tiempo restante desde el localStorage
 
+      // Si no hay tiempo guardado, usa 10 minutos (600 segundos)
       if (!timeRemaining) {
-        timeRemaining = 10 * 60; // Si no hay tiempo guardado, usa 10 minutos
+        timeRemaining = 10 * 60;
+        localStorage.setItem('timeRemaining', timeRemaining); // Si no existe, lo establece en localStorage
       } else {
-        timeRemaining = parseInt(timeRemaining); // Convierte el tiempo a entero
+        timeRemaining = parseInt(timeRemaining); // Convierte el tiempo guardado a entero
       }
 
       // Función que actualiza el contador cada segundo
